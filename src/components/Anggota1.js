@@ -1,9 +1,10 @@
 import React from "react";
 import "../styles/Anggota.css";
 import CardAnggota from "./CardAnggota";
-import DataAnggota from "./DataAnggota";
 import CardKetua from "./CardKetua";
-import DataPilar from "./DataPilar";
+import useSanityQuery from "../hooks/useSanityQuery";
+import { queries, urlFor } from "../lib/sanity";
+import { ContentError, ContentLoading } from "./ContentStatus";
 
 const BIDANG_ORDER = [
   "Humas",
@@ -24,9 +25,28 @@ const BIDANG_LABEL = {
 const INTI_ORDER = ["Wakil Ketua", "Sekretaris", "Bendahara"];
 
 const Anggota1 = () => {
-  const ketua = DataPilar.find((p) => p.jabatan === "Ketua");
+  const {
+    data: pengurus,
+    loading: loadingPengurus,
+    error: errorPengurus,
+  } = useSanityQuery(queries.pengurus, []);
+  const {
+    data: anggota,
+    loading: loadingAnggota,
+    error: errorAnggota,
+  } = useSanityQuery(queries.anggota, []);
+
+  if (loadingPengurus || loadingAnggota) {
+    return <ContentLoading label="Memuat anggota…" />;
+  }
+
+  if (errorPengurus || errorAnggota) {
+    return <ContentError error={errorPengurus || errorAnggota} />;
+  }
+
+  const ketua = (pengurus || []).find((p) => p.jabatan === "Ketua");
   const pengurusLain = INTI_ORDER.map((jabatan) =>
-    DataPilar.find((p) => p.jabatan === jabatan)
+    (pengurus || []).find((p) => p.jabatan === jabatan)
   ).filter(Boolean);
 
   return (
@@ -45,8 +65,8 @@ const Anggota1 = () => {
         {ketua && (
           <div className="pilar-featured">
             <CardKetua
-              img={ketua.img}
-              name={ketua.name}
+              img={urlFor(ketua.foto)}
+              name={ketua.nama}
               jabatan={ketua.jabatan}
               featured
             />
@@ -56,29 +76,29 @@ const Anggota1 = () => {
         <div className="pilar-row">
           {pengurusLain.map((val) => (
             <CardKetua
-              key={val.jabatan}
-              img={val.img}
-              name={val.name}
+              key={val._id}
+              img={urlFor(val.foto)}
+              name={val.nama}
               jabatan={val.jabatan}
             />
           ))}
         </div>
       </section>
 
-      {BIDANG_ORDER.map((jabatan) => {
-        const members = DataAnggota.filter((p) => p.jabatan === jabatan);
+      {BIDANG_ORDER.map((bidang) => {
+        const members = (anggota || []).filter((p) => p.bidang === bidang);
         if (members.length === 0) return null;
 
         return (
-          <section key={jabatan} className="ang-section">
-            <h2 className="ang-section-title">{BIDANG_LABEL[jabatan]}</h2>
+          <section key={bidang} className="ang-section">
+            <h2 className="ang-section-title">{BIDANG_LABEL[bidang]}</h2>
             <div className="anggota-container">
               {members.map((val) => (
                 <CardAnggota
-                  key={val.title}
-                  imgsrc={val.imgsrc}
-                  title={val.title}
-                  ketua={val.jabatan}
+                  key={val._id}
+                  imgsrc={urlFor(val.foto)}
+                  title={val.nama}
+                  ketua={val.bidang}
                 />
               ))}
             </div>

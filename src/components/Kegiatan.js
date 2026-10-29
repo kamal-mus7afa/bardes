@@ -1,10 +1,21 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import Bardes1 from '../assets/image/bardes1.jpg';
-import Bardes2 from '../assets/image/bardes2.jpg';
-import '../styles/Kegiatan.css';
+import React from "react";
+import { Link } from "react-router-dom";
+import "../styles/Kegiatan.css";
+import useSanityQuery from "../hooks/useSanityQuery";
+import { queries, urlFor } from "../lib/sanity";
+import { ContentError, ContentLoading } from "./ContentStatus";
 
 const Kegiatan = () => {
+  const { data, loading, error } = useSanityQuery(queries.kegiatanPreview, []);
+
+  if (loading) {
+    return <ContentLoading label="Memuat kegiatan…" />;
+  }
+
+  if (error) {
+    return <ContentError error={error} />;
+  }
+
   return (
     <section className="kegiatan">
       <div className="kegiatan-head section">
@@ -20,14 +31,18 @@ const Kegiatan = () => {
         </Link>
       </div>
 
-      <div className="kegiatan-strip">
-        <figure className="kegiatan-shot">
-          <img src={Bardes1} alt="Kegiatan BARDES" />
-        </figure>
-        <figure className="kegiatan-shot">
-          <img src={Bardes2} alt="Kegiatan BARDES" />
-        </figure>
-      </div>
+      {data?.length > 0 && (
+        <div className="kegiatan-strip">
+          {data.map((item) => (
+            <figure className="kegiatan-shot" key={item._id}>
+              <img
+                src={urlFor(item.foto)}
+                alt={item.judul || "Kegiatan BARDES"}
+              />
+            </figure>
+          ))}
+        </div>
+      )}
     </section>
   );
 };

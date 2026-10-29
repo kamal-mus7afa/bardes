@@ -8,6 +8,8 @@
     "@fortawesome/free-brands-svg-icons": "^6.7.2",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
+    "@sanity/client": "^8.13.0",
+    "@sanity/image-url": "^2.1.1",
     "cra-template": "1.2.0",
     "react": "^19.0.0",
     "react-bootstrap": "^2.10.8",
@@ -20,7 +22,11 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "seed": "node --env-file=.env scripts/seed-sanity.mjs",
+    "studio": "npm --prefix studio run dev",
+    "studio:deploy": "npm --prefix studio run deploy",
+    "migrate": "node --env-file=.env scripts/migrate-unify-anggota.mjs"
   },
   "eslintConfig": {
     "extends": [
@@ -42,5 +48,8 @@
   },
   "engines": {
     "node": ">=20.0.0"
+  },
+  "devDependencies": {
+    "dotenv": "^18.0.9"
   }
 }

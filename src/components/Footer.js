@@ -1,26 +1,38 @@
-import { FaInstagram, FaMailBulk, FaPhone, FaWhatsapp } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
-import '../styles/Footer.css';
+import { FaInstagram, FaMailBulk, FaPhone, FaWhatsapp } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import "../styles/Footer.css";
+import useSanityQuery from "../hooks/useSanityQuery";
+import { queries } from "../lib/sanity";
 
 const Footer = () => {
+  const { data } = useSanityQuery(queries.siteSettings, null);
+
+  const tagline =
+    data?.footerTagline ||
+    "Barisan Relawan Desa — siaga melindungi desa dari ancaman kebakaran.";
+  const alamat1 = data?.alamatBaris1 || "Jl. Negara Kandangan, Banjar Baru";
+  const alamat2 = data?.alamatBaris2 || "Kalimantan Selatan";
+  const telepon = data?.telepon || "0821 5492 3388";
+  const email = data?.email || "bardes.firefighter@gmail.com";
+  const wa = data?.whatsappUrl || "https://wa.me/6282154923388";
+  const ig = data?.instagramUrl || "https://instagram.com";
+
   return (
     <footer className="footer">
       <div className="footer-inner">
         <div className="footer-brand">
           <p className="footer-wordmark">BARDES</p>
-          <p className="footer-tag">
-            Barisan Relawan Desa — siaga melindungi desa dari ancaman kebakaran.
-          </p>
+          <p className="footer-tag">{tagline}</p>
         </div>
 
         <div className="footer-meta">
-          <p>Jl. Negara Kandangan, Banjar Baru</p>
-          <p>Kalimantan Selatan</p>
+          <p>{alamat1}</p>
+          <p>{alamat2}</p>
           <p className="footer-contact">
-            <FaPhone aria-hidden /> 0821 5492 3388
+            <FaPhone aria-hidden /> {telepon}
           </p>
           <p className="footer-contact">
-            <FaMailBulk aria-hidden /> bardes.firefighter@gmail.com
+            <FaMailBulk aria-hidden /> {email}
           </p>
         </div>
 
@@ -31,10 +43,10 @@ const Footer = () => {
             <Link to="/dokumentasi">Dokumentasi</Link>
           </nav>
           <div className="footer-social">
-            <a href="https://wa.me/6282154923388" target="_blank" rel="noreferrer" aria-label="WhatsApp">
+            <a href={wa} target="_blank" rel="noreferrer" aria-label="WhatsApp">
               <FaWhatsapp />
             </a>
-            <a href="https://instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram">
+            <a href={ig} target="_blank" rel="noreferrer" aria-label="Instagram">
               <FaInstagram />
             </a>
           </div>

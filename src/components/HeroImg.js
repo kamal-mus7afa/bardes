@@ -1,20 +1,39 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import '../styles/HeroImg.css';
-import BardesFr from '../assets/image/bardesfr.jpg';
+import React from "react";
+import { Link } from "react-router-dom";
+import "../styles/HeroImg.css";
+import useSanityQuery from "../hooks/useSanityQuery";
+import { queries, urlFor } from "../lib/sanity";
+import { ContentError, ContentLoading } from "./ContentStatus";
 
 const HeroImg = () => {
+  const { data, loading, error } = useSanityQuery(queries.siteSettings, null);
+
+  if (loading) {
+    return <ContentLoading label="Memuat beranda…" />;
+  }
+
+  if (error) {
+    return <ContentError error={error} />;
+  }
+
+  const heroSrc = data?.heroImage ? urlFor(data.heroImage) : "";
+
   return (
     <section className="hero">
-      <img className="hero-media" src={BardesFr} alt="" />
+      {heroSrc ? (
+        <img className="hero-media" src={heroSrc} alt="" />
+      ) : (
+        <div className="hero-media" style={{ background: "#121212" }} />
+      )}
       <div className="hero-shade" aria-hidden />
       <div className="hero-content">
-        <p className="hero-brand anim-rise">BARDES</p>
+        <p className="hero-brand anim-rise">{data?.heroBrand || "BARDES"}</p>
         <h1 className="hero-title anim-rise-delay">
-          Siaga melindungi desa
+          {data?.heroTitle || "Siaga melindungi desa"}
         </h1>
         <p className="hero-lead anim-rise-late">
-          Barisan Relawan Desa siap bertindak cepat menghadapi ancaman kebakaran.
+          {data?.heroLead ||
+            "Barisan Relawan Desa siap bertindak cepat menghadapi ancaman kebakaran."}
         </p>
         <div className="hero-actions anim-rise-late">
           <Link to="/anggota" className="btn">
