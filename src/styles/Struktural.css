@@ -1,157 +1,92 @@
 .struktural {
-    height: 100%;
-    width: 100%;
-    text-align: center;
+  padding-top: 4.5rem;
+  padding-bottom: 5rem;
 }
 
-.struktural-container {
-    height: 100%;
-    width: 100%;
-    padding: 6rem 0;
+.struktural-lead {
+  margin-bottom: 2.5rem;
 }
 
-.bgStruk {
-    background-color: #fff;
-    border-radius: 20px;
-    padding: 20px;
-    margin: 30px;
-    box-shadow: 3px 3px 6px 0px rgba(0, 0, 0, 0.116);
+.struk-inti {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  margin-bottom: 2.5rem;
 }
 
-.ketua {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 20px;
-}
-.ketua h3 {
-    text-align: center;
-    margin-bottom: 10px;
-}
-.wakilKetua {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 20px;
-}
-.wakilKetua h3{
-    text-align: center;
-    margin-bottom: 10px;
+.struk-person {
+  background: var(--bg-elevated);
+  padding: 1.5rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  min-height: 7.5rem;
 }
 
-.sekBen{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    text-align: center;
-    margin-bottom: 20px;
+.struk-person:first-child {
+  background:
+    linear-gradient(160deg, rgba(122, 18, 28, 0.45), transparent 70%),
+    var(--bg-elevated);
 }
 
-.sekBen h3 {
-    text-align: center;
+.struk-role {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--red-bright);
 }
 
-.seksi {
-    display: flex;
-    justify-content: space-around;
-
+.struk-name {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.35;
 }
 
-p {
-    color: #fff;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+.struk-seksi {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1.25rem;
 }
 
-.anggota-Humas h3{
-    text-align: center;
-}
-.anggotaKorlap h3{
-    text-align: center;
-}
-.anggotaKes h3{
-    text-align: center;
-}
-.anggotaPem h3{
-    text-align: center;
-}
-.anggotaDok h3{
-    text-align: center;
+.struk-group-title {
+  font-family: var(--font-display);
+  font-size: 1.55rem;
+  letter-spacing: 0.06em;
+  color: var(--text);
+  margin-bottom: 0.85rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--line);
 }
 
-h3 {
-    margin-bottom: 10px;
+.struk-group li {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  padding: 0.35rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.card {
-    background-color: #913436;
-    border-radius: 10px;
-    padding: 10px;
-    width: 200px;
-    height: 65px;
-    align-items: center;
-    color: #FFF6E3;
-    text-align: center;
+.struk-group li:last-child {
+  border-bottom: none;
 }
 
+@media screen and (max-width: 960px) {
+  .struk-inti {
+    grid-template-columns: repeat(2, 1fr);
+  }
 
-.card ul {
-    display: contents;
-    font-size: 15px;
-    list-style: none;
+  .struk-seksi {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
-.card-seksi {
-    background-color: #913436;
-    border-radius: 10px;
-    padding: 10px;
-    width: 200px;
-    height: 100px;
-    align-items: center;
-    color: #FFF6E3;
-    text-align: center;
-    display: block;
-    justify-content: center;
-}
-
-@media screen and (max-width: 640px) {
-    .struktural-container {
-        padding: 4rem 1rem;
-    }
-
-    .struktural h1 {
-        font-size: 25px;
-        margin-bottom: 1rem;
-    }
-
-    .bgStruk {
-        height: 70%;
-        width: 100%;
-        padding: 10px;
-        margin: 0;
-    }
-
-    .card ul {
-        font-size: 8px;
-    }
-
-    h3 {
-        font-size: 10px;
-    }
-
-    .card {
-        width: 100%;
-        height: 70%;
-    }
-    
-    .card p {
-        font-size: 8px;
-    }
-
-    .card-seksi {
-        width: 100%;
-        height: 80%;
-        font-size: 8px;
-    }
+@media screen and (max-width: 560px) {
+  .struk-inti,
+  .struk-seksi {
+    grid-template-columns: 1fr;
+  }
 }

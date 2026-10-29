@@ -1,103 +1,67 @@
 import React from "react";
-
 import "../styles/Struktural.css";
+
+const INTI = [
+  { role: "Ketua", name: "Muhammad Zumbri" },
+  { role: "Wakil Ketua", name: "Akhmad Dzikra Riyadi" },
+  { role: "Sekretaris", name: "Mustafa Kamal" },
+  { role: "Bendahara", name: "Abu Bakar" },
+];
+
+const SEKSI = [
+  {
+    title: "Humas",
+    names: ["Muhammad Fazril", "Muhammad Rizal", "Muhammad Aldi Syahputra"],
+  },
+  {
+    title: "KorLap",
+    names: ["Rahman", "Muhammad Alpian Nor"],
+  },
+  {
+    title: "Kesehatan",
+    names: ["Amaluddin Siagian", "Muhammad Ansyari", "Muhammad Donny Septian"],
+  },
+  {
+    title: "Pemeliharaan",
+    names: ["Ahmad Rifai", "Muhammad Khafi", "Muhammad Riswan"],
+  },
+  {
+    title: "Dokumentasi",
+    names: ["Muhammad Wahyuni", "Muhammad Daud", "Muhammad Aldi"],
+  },
+];
 
 const StrukturalData = () => {
   return (
-    <>
-      <div id="struktural" className="struktural">
-        <div className="struktural-container">
-          <div className="title-struk">
-            <h1>STRUKTURAL BARDES</h1>
+    <section id="struktural" className="struktural section">
+      <p className="section-label">Organisasi</p>
+      <h2 className="section-title">Struktur BARDES</h2>
+      <p className="section-lead struktural-lead">
+        Hierarki pengurus inti dan bidang kerja relawan.
+      </p>
+
+      <div className="struk-inti">
+        {INTI.map((item) => (
+          <div key={item.role} className="struk-person">
+            <span className="struk-role">{item.role}</span>
+            <strong className="struk-name">{item.name}</strong>
           </div>
-          <div className="bgStruk">
-            <div className="card-component">
-              <div className="ketua">
-                <div className="titleKetua">
-                  <h3>Ketua</h3>
-                  <div className="card">
-                    <p>Muhammad Zumbri</p>
-                  </div>
-                </div>
-              </div>
-              <div className="wakilKetua">
-                <div className="titleWakil">
-                  <h3>Wakil Ketua</h3>
-                  <div className="card">
-                    <p>Akhmad Dzikra Riyadi</p>
-                  </div>
-                </div>
-              </div>
-              <div className="sekBen">
-                <div className="bendahara">
-                  <h3>Bendahara</h3>
-                  <div className="card">
-                    <p>Abu Bakar</p>
-                  </div>
-                </div>
-                <div className="sekretaris">
-                  <h3>Sekretaris</h3>
-                  <div className="card">
-                    <p>Mustafa Kamal</p>
-                  </div>
-                </div>
-              </div>
-              <div className="seksi">
-                <div className="anggota-Humas">
-                  <h3>Humas</h3>
-                  <div className="card-seksi">
-                    <ul>
-                      <li>Muhammad Fazril</li>
-                      <li>Muhammad Rizal</li>
-                      <li>Muhammad Aldi Syahputra</li>
-                    </ul>
-                  </div>
-                </div>
-                <div className="anggotaKorlap">
-                  <h3>KorLap</h3>
-                  <div className="card-seksi">
-                    <ul>
-                      <li>Rahman</li>
-                      <li>Muhammad Alpian Nor</li>
-                    </ul>
-                  </div>
-                </div>
-                <div className="anggotaKes">
-                  <h3>Kesehatan</h3>
-                  <div className="card-seksi">
-                    <ul>
-                      <li>Amaluddin Siagian</li>
-                      <li>Muhammad Ansyari</li>
-                      <li>Muhammad Donny Septian</li>
-                    </ul>
-                  </div>
-                </div>
-                <div className="anggotaPem">
-                  <h3>Pemeliharaan</h3>
-                  <div className="card-seksi">
-                    <ul>
-                      <li>Ahmad Rifai</li>
-                      <li>Muhammad Khafi</li>
-                      <li>Muhammad Riswan</li>
-                    </ul>
-                  </div>
-                </div>
-                <div className="anggotaDok">
-                  <h3>Dokumentasi</h3>
-                  <div className="card-seksi">
-                    <ul>
-                      <li>Muhammad Wahyuni</li>
-                      <li>Muhammad Daud</li>
-                      <li>Muhammad Aldi</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        ))}
       </div>
-    </>
+
+      <div className="struk-seksi">
+        {SEKSI.map((group) => (
+          <div key={group.title} className="struk-group">
+            <h3 className="struk-group-title">{group.title}</h3>
+            <ul>
+              {group.names.map((name) => (
+                <li key={name}>{name}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </section>
   );
 };
 

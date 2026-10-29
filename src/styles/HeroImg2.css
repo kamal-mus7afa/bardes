@@ -1,46 +1,45 @@
-.hero-img {
-    width: 100%;    
-    height: 100%;
-    position: relative;
+.page-hero {
+  position: relative;
+  min-height: clamp(320px, 55vh, 520px);
+  display: grid;
+  align-items: end;
+  overflow: hidden;
 }
 
-.hero-img::before {
-    content: "";
-    background-size: cover;
-    background-position: center top;
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background: rgba(0, 0, 0, 0.5);
-
+.page-hero-media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: heroWash 1.2s ease both;
 }
 
-.hero-img h1 {
-    font-size: 2.4rem;
+.page-hero-shade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(10, 10, 10, 0.25) 0%, rgba(10, 10, 10, 0.88) 100%),
+    linear-gradient(90deg, rgba(74, 10, 16, 0.4), transparent 60%);
+  pointer-events: none;
 }
 
-.hero-img p {
-    font-size: 1.4rem;
-    text-align: center;
+.page-hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: var(--max);
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 1.5rem 3rem;
 }
 
-.heading {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.page-hero-title {
+  font-size: clamp(3.2rem, 10vw, 5.5rem);
+  letter-spacing: 0.06em;
+  margin-bottom: 0.65rem;
 }
 
-@media screen and (max-width: 640px) {
-    .hero-img h1 {
-        font-size: 12px;
-    }
-
-    .hero-img {
-        
-    }
+.page-hero-lead {
+  max-width: 28rem;
+  font-size: 1.05rem;
 }

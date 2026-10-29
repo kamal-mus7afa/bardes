@@ -1,22 +1,18 @@
 import React from "react";
-import '../styles/DataDokumentasi.css'
+import '../styles/DataDokumentasi.css';
 
-const IsiDokumentasi = (props) => {
+const IsiDokumentasi = ({ imgsrc, title, subtitle, deskripsi }) => {
   return (
-    <div className="dokumentasi-display">
-      <div className="rightD">
-        <div className="dImg">
-          <img src={props.imgsrc} alt="bardes1" />
-        </div>
+    <article className="dok-item">
+      <div className="dok-media">
+        <img src={imgsrc} alt={title} />
       </div>
-      <div className="leftD">
-        <h1 className="Dtitle">{props.title}</h1>
-        <h2 className="subtitle">{props.subtitle}</h2>
-        <p className="deskripsi1">
-          {props.deskripsi}
-        </p>
+      <div className="dok-copy">
+        <h2 className="dok-title">{title}</h2>
+        <p className="dok-subtitle">{subtitle}</p>
+        <p className="dok-desc">{deskripsi}</p>
       </div>
-    </div>
+    </article>
   );
 };
 

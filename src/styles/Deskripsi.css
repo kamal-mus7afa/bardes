@@ -1,40 +1,36 @@
-.main {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    
+.about {
+  padding-top: 5.5rem;
+  padding-bottom: 4rem;
 }
 
-.title-deskripsi h1 {
-    text-align: center;
-    font-size: 4rem;
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem 3rem;
+  margin-top: 0.5rem;
 }
 
-.mainContainer {
-    padding: 2rem;
-    margin-top: 50px;
+.about-lead {
+  font-size: clamp(1.15rem, 2.2vw, 1.4rem);
+  line-height: 1.55;
+  color: var(--text);
+  font-weight: 500;
 }
 
-.deskripsiBardes p {
-    font-size: 24px;
-    padding: 2rem;
-    text-align: justify;
+.about-body {
+  font-size: 1.02rem;
+  align-self: end;
 }
 
-@media screen and (max-width: 640px) {
-    .mainContainer {
-        margin-top: 100px;
-    }
-    
-    .title-deskripsi h1{
-        font-size: 16px;
-    }
+.about-rule {
+  margin-top: 3.5rem;
+  height: 1px;
+  background: linear-gradient(90deg, var(--red-bright), transparent 70%);
+}
 
-    .deskripsiBardes p {
-        font-size: 12px;
-        text-align: justify;
-    }
+@media screen and (max-width: 720px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
 }
